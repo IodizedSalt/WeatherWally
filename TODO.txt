@@ -1,0 +1,4 @@
+- dump data  from API calls somewhere
+- process data, and calculate averages over course of day
+- concatenate average temperature forecast for the day and store it in climate_data
+- zip up all fetched_data and move to fetched_data_historical
