@@ -6,15 +6,26 @@ const DATA_FILE = path.join(__dirname, 'climate_data/processed_data.json');
 const CURRENT_DATA_FILE = path.join(__dirname, 'fetched_data/current_data.json');
 
 // Load/init processed data
-let climateData = {};
+let climateData = {processed_files: {}, data: {}};
 if (fs.existsSync(DATA_FILE)) {
   const content = fs.readFileSync(DATA_FILE, 'utf-8');
-  climateData = content ? JSON.parse(content) : {};
+  climateData = content ? JSON.parse(content) : {processed_files: [], data:{}};
 }
 
 // Load current fetched data
 const currentJson = fs.readFileSync(CURRENT_DATA_FILE, 'utf8');
 const currentData = JSON.parse(currentJson);
+
+// Add the metadata timestamp to the processed data file
+if(climateData.processed_files.at(-1) == currentData.properties.meta.updated_at){
+	console.log('FILE IS SAME')
+	process.exit(0); // Exit the script early
+}else if(climateData.processed_files.length == 0){
+	console.log('FILE IS EMPTY')
+}else{
+	console.log('FILE IS DIFFERENT')
+}
+climateData.processed_files.push(currentData.properties.meta.updated_at)
 
 currentData.properties.timeseries.forEach(({ time, data }) => {
   const details = data.instant.details;
@@ -27,9 +38,9 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 	wind_speed
   } = details;
 
-  if (!climateData[time]) {
+  if (!climateData.data[time]) {
 	// First time seeing this timepoint
-		climateData[time] = {
+		climateData.data[time] = {
 		air_temperature,
 		air_temperature_sum: Math.trunc(air_temperature * 10) / 10,
 		air_temperature_count: 1,
@@ -41,13 +52,13 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 		wind_speed
 	};
   } else {
-	const prev = climateData[time];
+	const prev = climateData.data[time];
 	const rawSum = prev.air_temperature_sum + air_temperature;
 	const sum = Math.trunc(rawSum * 10) / 10;
 	const count = prev.air_temperature_count + 1;
 	const avg = sum / count;
 
-	climateData[time] = {
+	climateData.data[time] = {
 	  ...prev,
 	  air_temperature,
 	  air_temperature_sum: sum,
