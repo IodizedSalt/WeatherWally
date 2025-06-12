@@ -1,11 +1,19 @@
 This is a lightweight, small scale application using YR.no API (and DMI.dk once they fix their email provider) to fetch weather data over the course of the day, and record/log it for personal lookback purposes.
 
-It requires 3 folders to be initialized: `climate_data`, `fetched_data`, `fetched_data_historical`
+Either run `npm run init` or `make init` to initialize the required folders/files
 
-Also an npm install
+If you do not manage to run either of the init scripts, then:
+    Otherwise, manually, it requires 3 folders to be initialized: 
+    - `climate_data` 
+    - `fetched_data`
+    - `fetched_data_historical`
+
+    Create a file in `climate_data` called `processed_data.json` with an empty JSON object.
+    Create a .env file with `API_IDENTITY`, `LATITUDE`, `LONGITUDE`, AND ~`DMI_API_KEY`~
+
+Also an npm install!
 
 
-Create a .env file with `API_IDENTITY`, `LATITUDE`, `LONGITUDE`, AND ~`DMI_API_KEY`~
 
 You must set an API_IDENTITY equal to a valid user agent in accordance to YR.no ToS: https://developer.yr.no/doc/TermsOfService/
 
