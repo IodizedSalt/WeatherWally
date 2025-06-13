@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+console.log('fetch weather YR')
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');

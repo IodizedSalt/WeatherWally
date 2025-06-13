@@ -1,0 +1,3 @@
+TODO:
+unit test for init scripts
+adjust init scripts to create processed_data.json with valid structure {"processed_files":[], "data":{}}

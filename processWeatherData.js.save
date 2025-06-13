@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
 
@@ -6,14 +6,25 @@ const DATA_FILE = path.join(__dirname, 'climate_data/processed_data.json');
 const CURRENT_DATA_FILE = path.join(__dirname, 'fetched_data/current_data.json');
 
 // Load/init processed data
-//let climateData = {processed_files: [], data: {}};
+
+
+
+
+
+
+
+
+
+
+
+
+
+let climateData = {processed_files: {}, data: {}};
 if (fs.existsSync(DATA_FILE)) {
   const content = fs.readFileSync(DATA_FILE, 'utf-8');
-  var climateData = content ? JSON.parse(content) : {processed_files: [], data:{}};
-}else{
-  var climateData = {processed_files: [], data: {}};
+  climateData = content ? JSON.parse(content) : {processed_files: [], data:{}};
 }
-//console.log(climateData)
+
 // Load current fetched data
 const currentJson = fs.readFileSync(CURRENT_DATA_FILE, 'utf8');
 const currentData = JSON.parse(currentJson);
@@ -27,7 +38,6 @@ if(climateData.processed_files && climateData.processed_files.at(-1) == currentD
 }else{
 	console.log('FILE IS DIFFERENT')
 }
-//console.log(climateData.processed_files)
 climateData.processed_files.push(currentData.properties.meta.updated_at)
 
 currentData.properties.timeseries.forEach(({ time, data }) => {
