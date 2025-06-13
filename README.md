@@ -20,3 +20,8 @@ You must set an API_IDENTITY equal to a valid user agent in accordance to YR.no 
 Set LATITUDE/LONGITUDE equal to what you want, in accordance to YR.no ToS (truncate coordinate decimals to 4 places): https://developer.yr.no/doc/TermsOfService/
 
 In order to use DMI data, you must create an account and generate an API KEY. Their email provider is down and their API is unstable, so currently this feature is not implemented
+
+
+Cron job for fetching and processing weather data every 6 hours:
+
+`2 */6 * * * cd <project_dir>WeatherWally && /usr/bin/node fetchWeather_YR.js && /usr/bin/node processWeatherData.js >> <logging_dir>cron_test.log 2>&1`
