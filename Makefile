@@ -15,7 +15,7 @@ $(INIT_DIRS):
 
 $(DATA_FILE):
 	@if [ ! -f $@ ]; then \
-		echo "{}" > $@ && \
+		echo '{"processed_files": [], "data": {}}'' > $@ && \
 		echo "📝 Created empty file: $@"; \
 	else \
 		echo "✔️ File already exists: $@"; \

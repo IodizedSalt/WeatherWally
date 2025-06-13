@@ -11,7 +11,7 @@ If you do not manage to run either of the init scripts, then:
     Create a file in `climate_data` called `processed_data.json` with an empty JSON object.
     Create a .env file with `API_IDENTITY`, `LATITUDE`, `LONGITUDE`, AND ~`DMI_API_KEY`~
 
-Also an npm install!
+Also an `npm run install:all`!
 
 
 

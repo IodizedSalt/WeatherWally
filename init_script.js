@@ -20,7 +20,7 @@ dirsToCreate.forEach((dir) => {
 // Create empty processed_data.json if not present
 const dataFilePath = path.join(climateDir, 'processed_data.json');
 if (!fs.existsSync(dataFilePath)) {
-  fs.writeFileSync(dataFilePath, '{}', 'utf8');
+  fs.writeFileSync(dataFilePath, '{"processed_files": [], "data": {}}', 'utf8');
   console.log(`✅ Created empty file: ${dataFilePath}`);
 } else {
   console.log(`✔️ File already exists: ${dataFilePath}`);
@@ -31,8 +31,8 @@ const envFilePath = path.join(__dirname, '.env');
 if (!fs.existsSync(envFilePath)) {
   const envContent = [
     'DMI_API_KEY=your_api_key_here',
-    'LATITUDE=00.0000',
-    'LONGITUDE=00.0000',
+    'LATITUDE=-27.062',
+    'LONGITUDE=-109.204',
     'API_IDENTITY=your_app_name_or_email'
   ].join('\n');
 

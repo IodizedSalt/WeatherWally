@@ -19,9 +19,9 @@ const currentJson = fs.readFileSync(CURRENT_DATA_FILE, 'utf8');
 const currentData = JSON.parse(currentJson);
 
 // Add the metadata timestamp to the processed data file
-if(climateData.processed_files && climateData.processed_files.at(-1) == currentData.properties.meta.updated_at){
+if(climateData.processed_files && climateData.processed_files.includes(currentData.properties.meta.updated_at)){
 	console.log('FILE IS SAME')
-	process.exit(0); // Exit the script early
+	process.exit(0);
 }else if(climateData.processed_files && climateData.processed_files.length == 0){
 	console.log('FILE IS EMPTY')
 }else{
@@ -47,7 +47,7 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 		air_temperature,
 		air_temperature_sum: Math.trunc(air_temperature * 10) / 10,
 		air_temperature_count: 1,
-		air_temperature_avg: air_temperature,
+		air_temperature_avg:  Math.trunc(air_temperature * 10) / 10,
 		air_pressure_at_sea_level,
 		cloud_area_fraction,
 		relative_humidity,
@@ -59,7 +59,7 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 	const rawSum = prev.air_temperature_sum + air_temperature;
 	const sum = Math.trunc(rawSum * 10) / 10;
 	const count = prev.air_temperature_count + 1;
-	const avg = sum / count;
+	const avg =  Math.trunc((sum / count) * 10) / 10;
 
 	climateData.data[time] = {
 	  ...prev,
