@@ -27,32 +27,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     dailyStats[date].wind.push(entry.wind_speed);
     dailyStats[date].pressure.push(entry.air_pressure_at_sea_level);
     dailyStats[date].cloud.push(entry.cloud_area_fraction);
-  }
+  }const events = [];
 
-  const events = Object.entries(dailyStats).map(([date, values]) => {
-    const high = Math.max(...values.temps).toFixed(1);
-    const low = Math.min(...values.temps).toFixed(1);
-    const avg = (values.temps.reduce((a, b) => a + b, 0) / values.temps.length).toFixed(1);
+Object.entries(dailyStats).forEach(([date, values]) => {
+  const low = Math.min(...values.temps).toFixed(1);
+  const high = Math.max(...values.temps).toFixed(1);
+  const avg = (values.temps.reduce((a, b) => a + b, 0) / values.temps.length).toFixed(1);
 
-    return {
-      title: `Low: ${low}°C, High: ${high}°C`,
-      start: date,
-      allDay: true,
-      extendedProps: {
-        avgTemp: avg,
-        humidity: (values.humidity.reduce((a, b) => a + b, 0) / values.humidity.length).toFixed(1),
-        wind: (values.wind.reduce((a, b) => a + b, 0) / values.wind.length).toFixed(1),
-        pressure: (values.pressure.reduce((a, b) => a + b, 0) / values.pressure.length).toFixed(1),
-        cloud: (values.cloud.reduce((a, b) => a + b, 0) / values.cloud.length).toFixed(1)
-      }
-    };
-  });
+  const commonProps = {
+    allDay: true,
+    start: date,
+    extendedProps: {
+      avgTemp: avg,
+      humidity: (values.humidity.reduce((a, b) => a + b, 0) / values.humidity.length).toFixed(1),
+      wind: (values.wind.reduce((a, b) => a + b, 0) / values.wind.length).toFixed(1),
+      pressure: (values.pressure.reduce((a, b) => a + b, 0) / values.pressure.length).toFixed(1),
+      cloud: (values.cloud.reduce((a, b) => a + b, 0) / values.cloud.length).toFixed(1),
+    }
+  };
+
+  events.push(
+    {
+      title: `High: ${high}°C`,
+      color: '#f44336',
+      extendedProps: { ...commonProps.extendedProps, type: 'high', value: high },
+      ...commonProps,
+      displayOrder: 1
+    },
+     {
+      title: `Low: ${low}°C`,
+      color: '#2196f3',
+      extendedProps: { ...commonProps.extendedProps, type: 'low', value: low },
+      ...commonProps,
+      displayOrder: 0
+    }
+  );
+});
 
   const calendarEl = document.getElementById('calendar');
   const calendar = new Calendar(calendarEl, {
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
     events: events,
+    eventOrder: 'displayOrder',
     eventClick(info) {
       const p = info.event.extendedProps;
       alert(
