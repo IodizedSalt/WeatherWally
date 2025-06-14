@@ -25,3 +25,12 @@ In order to use DMI data, you must create an account and generate an API KEY. Th
 Cron job for fetching and processing weather data every 6 hours:
 
 `2 */6 * * * cd <project_dir>WeatherWally && /usr/bin/node fetchWeather_YR.js && /usr/bin/node processWeatherData.js >> <logging_dir>cron_test.log 2>&1`
+
+
+Docker build:
+
+`docker build -t vite-express-dev .`
+
+Docker run:
+
+`docker run --rm -p 3000:3000 -p 5173:5173 vite-express-dev`
