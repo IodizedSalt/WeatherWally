@@ -25,4 +25,4 @@ WORKDIR /app
 RUN npm install concurrently --save-dev
 
 # Default command: run both servers in dev mode
-CMD ["npx", "concurrently", "node app.js", "npm --prefix frontend run dev"]
+CMD ["npx", "concurrently", "node app.js", "npm --prefix frontend run prod -- --host 0.0.0.0"]

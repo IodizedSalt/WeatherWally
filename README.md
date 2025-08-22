@@ -34,3 +34,7 @@ Docker build:
 Docker run:
 
 `docker run --rm -p 3000:3000 -p 5173:5173 vite-express-dev`
+
+or 
+
+` docker run -d --network home_network --name vite-app -p 5173:5173 -p 3000:3000 vite-express-dev`
