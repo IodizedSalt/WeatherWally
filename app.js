@@ -17,6 +17,7 @@ fs.readFile(path.join(__dirname, 'climate_data', 'processed_data.json'), 'utf8',
   }
   res.json(JSON.parse(data));
 });
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Backend listening on http://localhost:${PORT}`));
