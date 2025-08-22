@@ -8,10 +8,14 @@ app.use(cors());
 
 app.get('/weather', (req, res) => {
 // fs.readFile(path.join(__dirname, '/climate_data/processed_data.json'), 'utf8', (err, data) => { //LocalDev
-fs.readFile('~/Workspace/WeatherWally/climate_data/processed_data.json', 'utf8', (err, data) => { //Prod
-    if (err) return res.status(500).json({ error: 'Failed to read data' });
-    res.json(JSON.parse(data));
-  });
+fs.readFile(path.join(__dirname, 'climate_data', 'processed_data.json'), 'utf8', (err, data) => {
+  if (err) {
+    console.log(err)
+    console.log(path.join(__dirname, 'climate_data', 'processed_data.json'))
+    return res.status(500).json({ error: 'Failed to read data' });
+
+  }
+  res.json(JSON.parse(data));
 });
 
 const PORT = 3000;
