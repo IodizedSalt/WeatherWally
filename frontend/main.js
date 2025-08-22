@@ -2,7 +2,8 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const res = await fetch('http://localhost:3000/weather');
+  // const res = await fetch('http://localhost:3000/weather'); // Localdev
+  const res = await fetch('http://192.168.1.160:3000/weather'); //Prod
   const rawData = await res.json();
   const data = rawData.data;
 
