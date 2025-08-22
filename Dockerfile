@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy backend files
 COPY package*.json ./
 COPY app.js ./
-COPY climate_data ./
+COPY climate_data ./processed_data/
 
 # Copy frontend files
 COPY frontend/ ./frontend/
