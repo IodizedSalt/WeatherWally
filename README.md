@@ -34,4 +34,4 @@ Docker build:
 Docker run:
 
 
-` docker run -d --network home_network --name vite-app -p 5173:5173 -p 3000:3000 vite-express-dev`
+` docker run -d --network home_network --name vite-app -v ~/Workspace/WeatherWally/climate_data/processed_data.json:/app/climate_data/processed_data.json -p 5173:5173 -p 3000:3000 vite-express-dev`
