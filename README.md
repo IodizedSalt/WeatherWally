@@ -35,3 +35,36 @@ Docker run:
 
 
 ` docker run -d --network home_network --name vite-app -v ~/Workspace/WeatherWally/climate_data/processed_data.json:/app/climate_data/processed_data.json -p 5173:5173 -p 3000:3000 vite-express-dev`
+
+
+Backup Files script
+
+    #!/bin/bash
+
+    # Get the current date in DDMMYY format
+    current_date=$(date +"%d%m%y")
+
+    # Set the backup directory based on the current date
+    backup_directory="/home/overlord/BackupData/$current_date"
+
+    # Create the backup directory if it doesn't exist
+    mkdir -p "$backup_directory"
+
+    # Source and destination directories
+    source_directory="/home/overlord/Workspace/HomeMaintenance/src/app/data"
+
+    # Declare an array of source files
+    source_files=("home_maintenance_tasks_status.json" "notepad.txt" "home_maintenance_tasks.json")
+
+    # Iterate over the source files and copy them to the destination directory
+    for file in "${source_files[@]}"; do
+        cp "$source_directory/$file" "$backup_directory/$file"
+    done
+
+    cp "/home/overlord/Workspace/WeatherWally/climate_data/processed_data.json" "$backup_directory/processed_data.json"
+
+`0 1 * * * /home/overlord/Workspace/scripts/backup_data_files.sh`
+
+
+
+
