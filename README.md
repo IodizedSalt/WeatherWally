@@ -66,5 +66,18 @@ Backup Files script
 `0 1 * * * /home/overlord/Workspace/scripts/backup_data_files.sh`
 
 
+################
+local dev:
+################
+dont use docker.
+
+    cd frontend/ 
+    npm run dev
+
+Another terminal
+    node app.js
+
+
+
 
 
