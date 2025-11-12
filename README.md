@@ -24,6 +24,9 @@ dont use docker.
 Another terminal
     node app.js
 
+# Makefile
+useful commands for restarting docker containers
+
 
 # YR API
 You must set an API_IDENTITY equal to a valid user agent in accordance to YR.no ToS: https://developer.yr.no/doc/TermsOfService/
@@ -77,20 +80,5 @@ Backup Files script
     cp "/home/overlord/Workspace/WeatherWally/climate_data/processed_data.json" "$backup_directory/processed_data.json"
 
 `0 1 * * * /home/overlord/Workspace/scripts/backup_data_files.sh`
-
-
-################
-local dev:
-################
-dont use docker.
-
-    cd frontend/ 
-    npm run dev
-
-Another terminal
-    node app.js
-
-
-
 
 

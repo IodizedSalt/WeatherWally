@@ -31,3 +31,31 @@ $(ENV_FILE):
 	else \
 		echo "✔️ .env file already exists."; \
 	fi
+
+IMAGE_NAME := weather-wally-image
+CONTAINER_NAME := WeatherWally
+NETWORK_NAME := home_network
+PORTS := -p 5173:5173 -p 3000:3000
+VOLUME := ~/Workspace/WeatherWally/climate_data/processed_data.json:/app/climate_data/processed_data.json
+
+build:
+	@echo "Building Docker image: $(IMAGE_NAME)"
+	docker build . -t $(IMAGE_NAME)
+
+clean:
+	@echo "Stop / rm Docker container: $(CONTAINER_NAME)"
+	docker stop homemaint && docker rm homemaint
+
+run:
+	@echo "Running $(CONTAINER_NAME) w/ image $(IMAGE_NAME)"
+	docker run -d --network $(NETWORK_NAME) --name $(CONTAINER_NAME) \
+		-v $(VOLUME) $(PORTS) $(IMAGE_NAME)
+
+update:
+	-@docker stop $(CONTAINER_NAME)
+	-@docker rm $(CONTAINER_NAME)
+	@echo "Rebuilding image: $(IMAGE_NAME)"
+	docker build . -t $(IMAGE_NAME)
+	@echo "Restarting container..."
+	docker run -d --network $(NETWORK_NAME) --name $(CONTAINER_NAME) \
+		-v $(VOLUME) $(PORTS) $(IMAGE_NAME)
