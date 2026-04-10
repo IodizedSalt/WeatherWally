@@ -5,7 +5,7 @@ ENV_FILE := .env
 
 .PHONY: init
 init: $(INIT_DIRS) $(DATA_FILE) $(ENV_FILE)
-	@echo "✅ All folders and files initialized."
+	@echo "All folders and files initialized."
 
 
 $(INIT_DIRS):
@@ -58,4 +58,4 @@ update:
 	docker build . -t $(IMAGE_NAME)
 	@echo "Restarting container..."
 	docker run -d --network $(NETWORK_NAME) --name $(CONTAINER_NAME) \
-		-v $(VOLUME) $(PORTS) $(IMAGE_NAME)
+		-v $(VOLUME) $(PORTS)  --restart unless-stopped $(IMAGE_NAME)
