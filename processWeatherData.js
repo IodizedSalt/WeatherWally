@@ -32,13 +32,26 @@ climateData.processed_files.push(currentData.properties.meta.updated_at)
 
 currentData.properties.timeseries.forEach(({ time, data }) => {
   const details = data.instant.details;
+
+
+
+
+// TODO: Implementation of precipitation
+
+
+
+
+
+//   ,{"time":"2026-03-09T16:00:00Z","data":{"instant":{"details":{"air_pressure_at_sea_level":1021.4,"air_temperature":8.6,"cloud_area_fraction":0.5,"relative_humidity":66.6,"wind_from_direction":152,"wind_speed":2.9}},"next_1_hours":{"summary":{"symbol_code":"clearsky_day"},"details":{"precipitation_amount":0}},"next_6_hours":{"summary":{"symbol_code":"clearsky_night"},"details":{"precipitation_amount":0}}}}
+  const precipitation = details;
   const {
 	air_temperature,
 	air_pressure_at_sea_level,
 	cloud_area_fraction,
 	relative_humidity,
 	wind_from_direction,
-	wind_speed
+	wind_speed,
+	// precipitation_amount
   } = details;
 
   if (!climateData.data[time]) {
@@ -52,7 +65,8 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 		cloud_area_fraction,
 		relative_humidity,
 		wind_from_direction,
-		wind_speed
+		wind_speed,
+		precipitation_amount
 	};
   } else {
 	const prev = climateData.data[time];
@@ -71,7 +85,8 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 	  cloud_area_fraction,
 	  relative_humidity,
 	  wind_from_direction,
-	  wind_speed
+	  wind_speed,
+	  precipitation_amount
 	};
   }
 });

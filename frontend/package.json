@@ -5,17 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prod":"vite --host 0.0.0.0",
+    "prod": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@fullcalendar/interaction": "^6.1.20",
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.20",
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/resource": "^6.1.20",
+    "@fullcalendar/resource-timeline": "^6.1.20",
+    "@fullcalendar/timegrid": "^6.1.20",
     "bootstrap": "^5.3.1",
-    "@fullcalendar/core": "^6.1.17",
-    "@fullcalendar/daygrid": "^6.1.17",
+    "fullcalendar": "^6.1.20",
     "weatherwally": "file:.."
   }
 }

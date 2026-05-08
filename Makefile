@@ -27,9 +27,9 @@ $(ENV_FILE):
 		echo "LATITUDE=00.0000" >> $@ && \
 		echo "LONGITUDE=00.0000" >> $@ && \
 		echo "API_IDENTITY=your_app_name_or_email" >> $@ && \
-		echo "🔐 Created .env with placeholder keys."; \
+		echo "Created .env with placeholder keys."; \
 	else \
-		echo "✔️ .env file already exists."; \
+		echo ".env file already exists."; \
 	fi
 
 IMAGE_NAME := weather-wally-image
