@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
           allDay: true,
 
-          color: '#ffdf00',
+          color: '#666557',
 
           displayOrder: 3,
 
@@ -268,14 +268,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     dateClick(info) {
 
       selectedDate = info.dateStr;
-    
+
       document.getElementById('noteInput').value = '';
       document.getElementById('greenhouseInput').value = '';
-    
+
       // IMPORTANT: reset select + UI state
       document.getElementById('entryType').value = 'note';
       updateEntryFields();
-    
+
       entryModal.show();
     }
   });
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const entryType =
     document.getElementById('entryType');
-    entryType.addEventListener('change', updateEntryFields);
+  entryType.addEventListener('change', updateEntryFields);
 
   document
     .getElementById('saveEntryBtn')
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       await fetch(`${API}/entry`, {
-      // await fetch(`${API_LOCAL}/entry`, {
+        // await fetch(`${API_LOCAL}/entry`, {
 
         method: 'POST',
 
@@ -372,20 +372,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const type =
       document.getElementById('entryType').value;
-  
+
     const noteField =
       document.getElementById('noteField');
-  
+
     const greenhouseField =
       document.getElementById('greenhouseField');
-  
+
     if (type === 'note') {
-  
+
       noteField.style.display = 'block';
       greenhouseField.style.display = 'none';
-  
+
     } else {
-  
+
       noteField.style.display = 'none';
       greenhouseField.style.display = 'block';
     }
