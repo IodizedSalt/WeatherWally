@@ -66,7 +66,7 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 		relative_humidity,
 		wind_from_direction,
 		wind_speed,
-		precipitation_amount
+		// precipitation_amount
 	};
   } else {
 	const prev = climateData.data[time];
@@ -86,7 +86,7 @@ currentData.properties.timeseries.forEach(({ time, data }) => {
 	  relative_humidity,
 	  wind_from_direction,
 	  wind_speed,
-	  precipitation_amount
+	//   precipitation_amount
 	};
   }
 });
