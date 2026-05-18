@@ -204,81 +204,62 @@ document.addEventListener('DOMContentLoaded', async () => {
   const calendarEl =
     document.getElementById('calendar');
 
-  const calendar = new Calendar(calendarEl, {
+    const calendar = new Calendar(calendarEl, {
 
-    plugins: [
-      dayGridPlugin,
-      timeGridPlugin,
-      interactionPlugin
-    ],
-
-    initialView: 'dayGridMonth',
-
-    headerToolbar: {
-      left: 'prev,next',
-      center: 'title',
-    },
-
-    events: events,
-
-    eventOrder: 'displayOrder',
-
-
-    eventClick(info) {
-
-      const p = info.event.extendedProps;
-
-      // NOTE
-
-      if (p.type === 'note') {
-
-        alert(
-          `Note:\n${p.note}`
+      plugins: [
+        dayGridPlugin,
+        timeGridPlugin,
+        interactionPlugin
+      ],
+    
+      initialView: 'dayGridMonth',
+    
+      headerToolbar: {
+        left: 'prev,next',
+        center: 'title',
+      },
+    
+      events,
+      eventOrder: 'displayOrder',
+    
+      dayCellDidMount(info) {
+    
+        const openEntry = () => {
+    
+          selectedDate = info.date.toISOString()
+            .split('T')[0];
+    
+          document.getElementById('noteInput').value = '';
+          document.getElementById('greenhouseInput').value = '';
+    
+          document.getElementById('entryType').value = 'note';
+    
+          updateEntryFields();
+    
+          entryModal.show();
+        };
+    
+        // Desktop click
+        info.el.addEventListener(
+          'click',
+          openEntry
         );
-
-        return;
-      }
-
-      if (p.type === 'greenhouse_min') {
-
-        alert(
-          `Greenhouse Min:\n${p.greenhouse_min}°C`
+    
+        // Mobile tap
+        info.el.addEventListener(
+          'touchend',
+          (e) => {
+            e.preventDefault();
+            openEntry();
+          },
+          { passive: false }
         );
-
-        return;
+      },
+    
+      eventClick(info) {
+        // your existing eventClick code
       }
-
-      alert(
-
-        `Date: ${info.event.startStr}\n` +
-
-        `Avg Temp: ${p.avgTemp}°C\n` +
-
-        `Humidity: ${p.humidity}%\n` +
-
-        `Wind Speed: ${p.wind} m/s\n` +
-
-        `Pressure: ${p.pressure} hPa\n` +
-
-        `Cloud Coverage: ${p.cloud}%`
-      );
-    },
-
-
-    dateClick(info) {
-
-      selectedDate = info.dateStr;
-
-      document.getElementById('noteInput').value = '';
-      document.getElementById('greenhouseInput').value = '';
-
-      // IMPORTANT: reset select + UI state
-      document.getElementById('entryType').value = 'note';
-      updateEntryFields();
-
-      entryModal.show();
-    }
-  });
+    });
 
 
   const entryType =
