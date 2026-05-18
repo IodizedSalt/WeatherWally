@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   let selectedDate = null;
+  let modalSelectedDate = null;
 
   const entryModal = new bootstrap.Modal(
     document.getElementById('entryModal')
@@ -228,7 +229,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     
           selectedDate = info.date.toISOString()
             .split('T')[0];
-    
+          console.log(selectedDate)
+          const dateLabel =
+          document.getElementById(
+            'selectedDateLabel'
+          );
+        
+        if (dateLabel) {
+          dateLabel.textContent =
+          selectedDate;
+        }
           document.getElementById('noteInput').value = '';
           document.getElementById('greenhouseInput').value = '';
     
