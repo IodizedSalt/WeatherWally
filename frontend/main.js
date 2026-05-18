@@ -249,16 +249,21 @@ document.addEventListener('DOMContentLoaded', async () => {
           entryModal.show();
         };
     
-        // Desktop click
-        info.el.addEventListener(
-          'click',
-          openEntry
-        );
-    
-        // Mobile tap
+        info.el.addEventListener('click', (e) => {
+          if (e.target.closest('.fc-event')) {
+            return;
+          }
+        
+          openEntry();
+        });
         info.el.addEventListener(
           'touchend',
           (e) => {
+        
+            if (e.target.closest('.fc-event')) {
+              return;
+            }
+        
             e.preventDefault();
             openEntry();
           },
@@ -267,7 +272,29 @@ document.addEventListener('DOMContentLoaded', async () => {
       },
     
       eventClick(info) {
-        // your existing eventClick code
+
+        const p = info.event.extendedProps;
+
+        if (p.type === 'note') {
+          alert(`Note:\n${p.note}`);
+          return;
+        }
+
+        if (p.type === 'greenhouse_min') {
+          alert(
+            `Greenhouse Min:\n${p.greenhouse_min}°C`
+          );
+          return;
+        }
+
+        alert(
+          `Date: ${info.event.startStr}\n` +
+          `Avg Temp: ${p.avgTemp}°C\n` +
+          `Humidity: ${p.humidity}%\n` +
+          `Wind Speed: ${p.wind} m/s\n` +
+          `Pressure: ${p.pressure} hPa\n` +
+          `Cloud Coverage: ${p.cloud}%`
+        );
       }
     });
 
