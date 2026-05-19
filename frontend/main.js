@@ -227,9 +227,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     
         const openEntry = () => {
     
-          selectedDate = info.date.toISOString()
-            .split('T')[0];
-          console.log(selectedDate)
+          // selectedDate = info.date.toISOString()
+          //   .split('T')[0];
+          selectedDate =
+            info.date.getFullYear() + '-' +
+            String(info.date.getMonth() + 1).padStart(2, '0') + '-' +
+            String(info.date.getDate()).padStart(2, '0');
+            // console.log(modalSelectedDate)
           const dateLabel =
           document.getElementById(
             'selectedDateLabel'
